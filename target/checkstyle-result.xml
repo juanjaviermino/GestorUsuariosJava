@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<checkstyle version="9.3">
-<file name="/home/runner/GestionDeTareasTDD/src/main/java/GestorTareas.java">
-<error line="1" severity="error" message="Missing package-info.java file." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck"/>
-</file>
-<file name="/home/runner/GestionDeTareasTDD/src/main/java/Tarea.java">
-<error line="16" column="40" severity="error" message="&apos;titulo&apos; hides a field." source="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"/>
-</file>
-</checkstyle>
