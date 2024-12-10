@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorUsuarios.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myartifactid</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">GestorUsuarios.java</span></div><h1>GestorUsuarios.java</h1><pre class="source lang-java linenums">import java.util.HashMap;
+import java.util.regex.Pattern;
+
+/**
+ * Gestiona las operaciones de usuarios, como agregar, actualizar y eliminar.
+ */
+public class GestorUsuarios {
+
+    private final HashMap&lt;String, Usuario&gt; usuarios;
+
+    /**
+     * Constructor para inicializar el gestor de usuarios.
+     */
+<span class="fc" id="L14">    public GestorUsuarios() {</span>
+<span class="fc" id="L15">        usuarios = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L16">    }</span>
+
+    /**
+     * Agrega un usuario con nombre y correo electrónico.
+     *
+     * @param nombre el nombre del usuario
+     * @param correo el correo del usuario
+     * @return true si el usuario fue agregado, false si ya existe
+     */
+    public boolean agregarUsuario(final String nombre, final String correo) {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (usuarios.containsKey(nombre)) {</span>
+<span class="fc" id="L27">            return false;</span>
+        }
+<span class="fc" id="L29">        usuarios.put(nombre, new Usuario(nombre, correo));</span>
+<span class="fc" id="L30">        return true;</span>
+    }
+
+    /**
+     * Verifica si un correo electrónico tiene un formato válido.
+     *
+     * @param correo el correo a verificar
+     * @return true si el correo es válido, false de lo contrario
+     */
+    public boolean esCorreoValido(final String correo) {
+<span class="fc" id="L40">        String regex = &quot;^[\\w-.]+@[\\w-]+\\.[a-zA-Z]{2,}$&quot;;</span>
+<span class="fc" id="L41">        return Pattern.matches(regex, correo);</span>
+    }
+
+    /**
+     * Actualiza el correo electrónico de un usuario existente.
+     *
+     * @param nombre      el nombre del usuario
+     * @param nuevoCorreo el nuevo correo del usuario
+     * @return true si el correo fue actualizado, false si el usuario no existe
+     */
+    public boolean actualizarCorreo(final String nombre, final String nuevoCorreo) {
+<span class="fc" id="L52">        Usuario usuario = usuarios.get(nombre);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (usuario != null) {</span>
+<span class="fc" id="L54">            usuario.setCorreo(nuevoCorreo);</span>
+<span class="fc" id="L55">            return true;</span>
+        }
+<span class="fc" id="L57">        return false;</span>
+    }
+
+    /**
+     * Elimina un usuario del sistema.
+     *
+     * @param nombre el nombre del usuario a eliminar
+     * @return true si el usuario fue eliminado, false si no existe
+     */
+    public boolean eliminarUsuario(final String nombre) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        return usuarios.remove(nombre) != null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -83,7 +83,7 @@ jobs:
 
       # Paso 5: Generar reporte de cobertura con JaCoCo
       - name: Generate Coverage Report
-        run: mvn jacoco:report
+        run: mvn clean verify
       - name: Output JaCoCo Coverage Report
         if: always()
         run: cat target/site/jacoco/jacoco.xml || echo "JaCoCo coverage report not found"

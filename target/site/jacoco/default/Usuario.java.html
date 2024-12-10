@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myartifactid</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">import java.util.Objects;
+
+/**
+ * Representa un usuario con nombre y correo electrónico.
+ */
+public class Usuario {
+
+    private String nombre;
+    private String correo;
+    private static String ultimoUsuario;
+
+    /**
+     * Constructor para inicializar el usuario con nombre y correo.
+     *
+     * @param nombre el nombre del usuario
+     * @param correo el correo del usuario
+     */
+<span class="fc" id="L18">    public Usuario(final String nombre, final String correo) {</span>
+<span class="fc" id="L19">        this.nombre = nombre;</span>
+<span class="fc" id="L20">        this.correo = correo;</span>
+<span class="fc" id="L21">        synchronized (Usuario.class) {</span>
+<span class="fc" id="L22">            ultimoUsuario = nombre; // Sincronización para evitar condiciones de carrera.</span>
+<span class="fc" id="L23">        }</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Obtiene el nombre del usuario.
+     *
+     * @return el nombre del usuario
+     */
+    public String getNombre() {
+<span class="fc" id="L32">        return nombre;</span>
+    }
+
+    /**
+     * Establece el nombre del usuario.
+     *
+     * @param nombre el nuevo nombre del usuario
+     */
+    public void setNombre(final String nombre) {
+<span class="fc" id="L41">        this.nombre = nombre;</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Obtiene el correo del usuario.
+     *
+     * @return el correo del usuario
+     */
+    public String getCorreo() {
+<span class="fc" id="L50">        return correo;</span>
+    }
+
+    /**
+     * Establece el correo del usuario.
+     *
+     * @param correo el nuevo correo del usuario
+     */
+    public void setCorreo(final String correo) {
+<span class="fc" id="L59">        this.correo = correo;</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * Compara si dos usuarios son iguales basados en el nombre y correo.
+     *
+     * @param obj el objeto a comparar
+     * @return true si son iguales, false en caso contrario
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L71">            return true;</span>
+        }
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (!(obj instanceof Usuario)) {</span>
+<span class="nc" id="L74">            return false;</span>
+        }
+<span class="fc" id="L76">        Usuario otro = (Usuario) obj;</span>
+<span class="pc bpc" id="L77" title="1 of 4 branches missed.">        return Objects.equals(nombre, otro.nombre) &amp;&amp; Objects.equals(correo, otro.correo);</span>
+    }
+
+    /**
+     * Genera un código hash basado en el nombre y correo.
+     *
+     * @return el código hash
+     */
+    @Override
+    public int hashCode() {
+<span class="fc" id="L87">        return Objects.hash(nombre, correo); // Incluye todos los campos relevantes.</span>
+    }
+
+    /**
+     * Imprime información del usuario.
+     */
+    public void imprimirInformacion() {
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (nombre != null) {</span>
+<span class="fc" id="L95">            System.out.println(&quot;Nombre: &quot; + nombre.toUpperCase());</span>
+        } else {
+<span class="nc" id="L97">            System.out.println(&quot;Nombre no disponible.&quot;);</span>
+        }
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (correo != null) {</span>
+<span class="fc" id="L100">            System.out.println(&quot;Correo: &quot; + correo.toLowerCase());</span>
+        } else {
+<span class="nc" id="L102">            System.out.println(&quot;Correo no disponible.&quot;);</span>
+        }
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Maneja contraseñas de forma más segura.
+     *
+     * @param contrasena la contraseña a manejar
+     */
+    public void manejarContrasena(String contrasena) {
+<span class="fc" id="L112">        char[] array = contrasena.toCharArray();</span>
+        try {
+<span class="fc" id="L114">            System.out.println(&quot;Contraseña recibida: [NO SE MUESTRA POR SEGURIDAD]&quot;); // Evita mostrar la contraseña.</span>
+        } finally {
+            // Limpia el contenido del arreglo para mayor seguridad.
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            for (int i = 0; i &lt; array.length; i++) {</span>
+<span class="fc" id="L118">                array[i] = '\0';</span>
+            }
+        }
+<span class="fc" id="L121">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
