@@ -7,6 +7,7 @@ public class Usuario {
 
     private String nombre;
     private String correo;
+    private static String ultimoUsuario;
 
     /**
      * Constructor para inicializar el usuario con nombre y correo.
