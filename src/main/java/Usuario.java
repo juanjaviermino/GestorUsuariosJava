@@ -7,7 +7,6 @@ public class Usuario {
 
     private String nombre;
     private String correo;
-    private static String ultimoUsuario; 
 
     /**
      * Constructor para inicializar el usuario con nombre y correo.
@@ -18,7 +17,9 @@ public class Usuario {
     public Usuario(final String nombre, final String correo) {
         this.nombre = nombre;
         this.correo = correo;
-        ultimoUsuario = nombre; 
+        synchronized (Usuario.class) {
+            ultimoUsuario = nombre; // Sincronización para evitar condiciones de carrera.
+        }
     }
 
     /**
@@ -72,7 +73,7 @@ public class Usuario {
             return false;
         }
         Usuario otro = (Usuario) obj;
-        return nombre == otro.nombre && correo == otro.correo; 
+        return Objects.equals(nombre, otro.nombre) && Objects.equals(correo, otro.correo);
     }
 
     /**
@@ -82,24 +83,39 @@ public class Usuario {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(nombre); 
+        return Objects.hash(nombre, correo); // Incluye todos los campos relevantes.
     }
 
     /**
-     * Imprime información del usuario. Método mal manejado para mostrar problemas.
+     * Imprime información del usuario.
      */
     public void imprimirInformacion() {
-        System.out.println("Nombre: " + nombre.toUpperCase()); 
-        System.out.println("Correo: " + correo.toLowerCase()); 
+        if (nombre != null) {
+            System.out.println("Nombre: " + nombre.toUpperCase());
+        } else {
+            System.out.println("Nombre no disponible.");
+        }
+        if (correo != null) {
+            System.out.println("Correo: " + correo.toLowerCase());
+        } else {
+            System.out.println("Correo no disponible.");
+        }
     }
 
     /**
-     * Método inseguro que maneja contraseñas.
+     * Maneja contraseñas de forma más segura.
      *
      * @param contrasena la contraseña a manejar
      */
     public void manejarContrasena(String contrasena) {
         char[] array = contrasena.toCharArray();
-        System.out.println("Contraseña recibida: " + contrasena); 
+        try {
+            System.out.println("Contraseña recibida: [NO SE MUESTRA POR SEGURIDAD]"); // Evita mostrar la contraseña.
+        } finally {
+            // Limpia el contenido del arreglo para mayor seguridad.
+            for (int i = 0; i < array.length; i++) {
+                array[i] = '\0';
+            }
+        }
     }
 }
