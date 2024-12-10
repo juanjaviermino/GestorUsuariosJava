@@ -25,23 +25,30 @@ jobs:
           distribution: 'temurin'
           cache: maven 
 
-      # 3. Ejecutar los plugins
+      # 3. Ejecutar el build y las pruebas
       - name: Build and Test
         run: mvn clean verify
 
       # 4. Ejecutar Checkstyle
       - name: Checkstyle Analysis
         run: mvn checkstyle:checkstyle
-        continue-on-error: true
+      - name: Output Checkstyle Results
+        if: always() # Para siempre mostrar resultados
+        run: cat target/checkstyle-result.xml || echo "Checkstyle report not found"
 
       # 5. Ejecutar SpotBugs
       - name: SpotBugs Analysis
         run: mvn spotbugs:spotbugs
-        continue-on-error: true
+      - name: Output SpotBugs Results
+        if: always()
+        run: cat target/spotbugsXml.xml || echo "SpotBugs report not found"
 
       # 6. Generar reporte de cobertura con JaCoCo
       - name: Generate Coverage Report
         run: mvn jacoco:report
+      - name: Output JaCoCo Coverage Report
+        if: always()
+        run: cat target/site/jacoco/jacoco.xml || echo "JaCoCo coverage report not found"
 
       # Paso 7: Subir artefactos generados
       - name: Upload artifacts
