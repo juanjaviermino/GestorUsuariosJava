@@ -8,6 +8,9 @@ public class GestorUsuarios {
 
     private final HashMap<String, Usuario> usuarios;
 
+    /**
+     * Constructor para inicializar el gestor de usuarios.
+     */
     public GestorUsuarios() {
         usuarios = new HashMap<>();
     }
@@ -19,7 +22,7 @@ public class GestorUsuarios {
      * @param correo el correo del usuario
      * @return true si el usuario fue agregado, false si ya existe
      */
-    public boolean agregarUsuario(String nombre, String correo) {
+    public boolean agregarUsuario(final String nombre, final String correo) {
         if (usuarios.containsKey(nombre)) {
             return false;
         }
@@ -33,7 +36,7 @@ public class GestorUsuarios {
      * @param correo el correo a verificar
      * @return true si el correo es válido, false de lo contrario
      */
-    public boolean esCorreoValido(String correo) {
+    public boolean esCorreoValido(final String correo) {
         String regex = "^[\\w-.]+@[\\w-]+\\.[a-zA-Z]{2,}$";
         return Pattern.matches(regex, correo);
     }
@@ -45,7 +48,7 @@ public class GestorUsuarios {
      * @param nuevoCorreo el nuevo correo del usuario
      * @return true si el correo fue actualizado, false si el usuario no existe
      */
-    public boolean actualizarCorreo(String nombre, String nuevoCorreo) {
+    public boolean actualizarCorreo(final String nombre, final String nuevoCorreo) {
         Usuario usuario = usuarios.get(nombre);
         if (usuario != null) {
             usuario.setCorreo(nuevoCorreo);
@@ -60,7 +63,7 @@ public class GestorUsuarios {
      * @param nombre el nombre del usuario a eliminar
      * @return true si el usuario fue eliminado, false si no existe
      */
-    public boolean eliminarUsuario(String nombre) {
+    public boolean eliminarUsuario(final String nombre) {
         return usuarios.remove(nombre) != null;
     }
 }

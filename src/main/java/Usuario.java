@@ -3,35 +3,60 @@
  */
 public class Usuario {
 
-    private String Nombre; 
-    private String CORREO; 
+    private String nombre;
+    private String correo;
 
     /**
-     * Constructor para inicializar el usuario con nombre y correo. 
+     * Constructor para inicializar el usuario con nombre y correo.
      *
      * @param nombre el nombre del usuario
      * @param correo el correo del usuario
      */
-    public Usuario(String Nombre, String CORREO) { 
-        this.Nombre=Nombre; 
-        this.CORREO=CORREO; 
+    public Usuario(final String nombre, final String correo) {
+        this.nombre = nombre;
+        this.correo = correo;
     }
 
-    public String getNombre() {return Nombre;} 
-
-    public void setNombre( String nombre ) { 
-        this.Nombre=nombre; 
+    /**
+     * Obtiene el nombre del usuario.
+     *
+     * @return el nombre del usuario
+     */
+    public String getNombre() {
+        return nombre;
     }
 
+    /**
+     * Establece el nombre del usuario.
+     *
+     * @param nombre el nuevo nombre del usuario
+     */
+    public void setNombre(final String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Obtiene el correo del usuario.
+     *
+     * @return el correo del usuario
+     */
     public String getCorreo() {
-        return this.CORREO; } 
+        return correo;
+    }
 
-    public void setCorreo(String correo){
-        this.CORREO=correo; } 
+    /**
+     * Establece el correo del usuario.
+     *
+     * @param correo el nuevo correo del usuario
+     */
+    public void setCorreo(final String correo) {
+        this.correo = correo;
+    }
 
-    public void metodoSinComentario() { 
-        System.out.println("Este método no tiene comentario"); 
+    /**
+     * Método placeholder sin funcionalidad real.
+     */
+    public void metodoSinComentario() {
+        System.out.println("Este método no tiene comentario.");
     }
 }
-
-
